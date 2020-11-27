@@ -1,21 +1,43 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import {NavigationContainer} from '@react-navigation/native'
+import {createStackNavigator} from '@react-navigation/stack'
+import {SafeAreaProvider} from 'react-native-safe-area-context'
+import {MoviesProvider} from './context/moviesContext'
+import MovieListScreen from './components/MovieListScreen'
+import MovieDetailsScreen from './components/MovieDetailScreen'
+import {StatusBar} from 'react-native'
 
-export default function App() {
+const Stack = createStackNavigator()
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <SafeAreaProvider>
+      <MoviesProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerStyle: {backgroundColor: 'indigo'},
+              headerTintColor: '#fff'
+            }}
+          >
+            <Stack.Screen
+              name="MovieList"
+              component={MovieListScreen}
+              options={{
+                title: 'Movie List'
+              }}
+            />
+            <Stack.Screen
+              name="MovieDetails"
+              component={MovieDetailsScreen}
+              options={{title: 'Movie Details'}}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+        <StatusBar barStyle="light-content" />
+      </MoviesProvider>
+    </SafeAreaProvider>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App
