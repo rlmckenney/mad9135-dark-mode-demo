@@ -6,6 +6,7 @@ import {MoviesProvider} from './context/moviesContext'
 import MovieListScreen from './components/MovieListScreen'
 import MovieDetailsScreen from './components/MovieDetailScreen'
 import {StatusBar} from 'react-native'
+import {colors} from './styles'
 
 const Stack = createStackNavigator()
 
@@ -16,8 +17,8 @@ function App() {
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{
-              headerStyle: {backgroundColor: 'indigo'},
-              headerTintColor: '#fff'
+              headerStyle: {backgroundColor: colors.headerBackground},
+              headerTintColor: colors.white
             }}
           >
             <Stack.Screen
