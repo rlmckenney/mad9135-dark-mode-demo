@@ -6,19 +6,29 @@ import {MoviesProvider} from './context/moviesContext'
 import MovieListScreen from './components/MovieListScreen'
 import MovieDetailsScreen from './components/MovieDetailScreen'
 import {StatusBar} from 'react-native'
-import {colors} from './styles'
+import {ThemeProvider, useTheme} from './context/themeContext'
 
 const Stack = createStackNavigator()
 
+function ThemeWrapper() {
+  return (
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
+  )
+}
+
 function App() {
+  const {theme} = useTheme()
+
   return (
     <SafeAreaProvider>
       <MoviesProvider>
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{
-              headerStyle: {backgroundColor: colors.headerBackground},
-              headerTintColor: colors.white
+              headerStyle: {backgroundColor: theme.primaryColor},
+              headerTintColor: theme.inverseTextColor
             }}
           >
             <Stack.Screen
@@ -41,4 +51,4 @@ function App() {
   )
 }
 
-export default App
+export default ThemeWrapper

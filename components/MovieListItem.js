@@ -1,6 +1,6 @@
 import React from 'react'
 import {StyleSheet, Text, TouchableOpacity} from 'react-native'
-import {colors, spacing, typography} from '../styles'
+import {colors, spacing, themes, typography} from '../styles'
 
 function MovieListItem({movie, onPress}) {
   return (
@@ -13,17 +13,18 @@ function MovieListItem({movie, onPress}) {
   )
 }
 
+const theme = themes.light
 const styles = StyleSheet.create({
   card: {
     paddingVertical: spacing.small,
     borderBottomWidth: spacing.hairline,
-    borderBottomColor: colors.indigo100
+    borderBottomColor: theme.listSeparatorColor
   },
-  title: {fontSize: typography.fs4, color: colors.darkText},
+  title: {fontSize: typography.fs4, color: theme.strongTextColor},
   releaseDate: {
     paddingTop: spacing.smallest,
     fontSize: typography.fs3,
-    color: colors.lightText
+    color: theme.subduedTextColor
   }
 })
 
