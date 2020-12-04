@@ -8,10 +8,10 @@ import {useTheme} from '../context/themeContext'
 
 function MovieListScreen({navigation}) {
   const [movies] = useMovies()
-  const {styles} = useTheme(stylesSheet)
+  const {styles} = useTheme(styleSheet)
 
   return (
-    <SafeAreaView style={{flex: 1}} edges={['right', 'bottom', 'left']}>
+    <SafeAreaView style={styles.safeArea} edges={['right', 'bottom', 'left']}>
       <FlatList
         style={styles.container}
         data={movies}
@@ -29,9 +29,12 @@ function MovieListScreen({navigation}) {
   )
 }
 
-const theme = themes.light
-const stylesSheet = theme =>
+const styleSheet = theme =>
   StyleSheet.create({
+    safeArea: {
+      flex: 1,
+      backgroundColor: theme.bodyBackgroundColor
+    },
     container: {
       padding: spacing.base,
       backgroundColor: theme.bodyBackgroundColor

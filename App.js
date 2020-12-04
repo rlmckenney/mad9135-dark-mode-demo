@@ -5,7 +5,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context'
 import {MoviesProvider} from './context/moviesContext'
 import MovieListScreen from './components/MovieListScreen'
 import MovieDetailsScreen from './components/MovieDetailScreen'
-import {StatusBar} from 'react-native'
+import {StatusBar, View} from 'react-native'
 import {ThemeProvider, useTheme} from './context/themeContext'
 
 const Stack = createStackNavigator()
