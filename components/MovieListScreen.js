@@ -3,7 +3,7 @@ import {FlatList, StyleSheet} from 'react-native'
 import {SafeAreaView} from 'react-native-safe-area-context'
 import {useMovies} from '../context/moviesContext'
 import MovieListItem from './MovieListItem'
-import {themes, spacing} from '../styles'
+import {spacing} from '../styles'
 import {useTheme} from '../context/themeContext'
 
 function MovieListScreen({navigation}) {
