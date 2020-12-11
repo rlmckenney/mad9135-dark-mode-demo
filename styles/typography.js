@@ -34,12 +34,14 @@ export const fwBlack = '900'
 
 /* Define common usage sizes */
 export const baseFontSize = fs3
+export const baseLineHeight = lh3
 export const buttonFontSize = fs4
+export const buttonFontWeight = fwNormal
 
 /* Define common styles */
 export const bodyText = {
   color: colors.baseText,
-  fontSize: fs3,
-  fontWeight: fwNormal,
-  lineHeight: lh3
+  fontSize: baseFontSize,
+  fontWeight: buttonFontWeight,
+  lineHeight: baseLineHeight
 }

@@ -1,16 +1,19 @@
 import React from 'react'
-import {FlatList} from 'react-native'
+import {FlatList, StyleSheet} from 'react-native'
 import {SafeAreaView} from 'react-native-safe-area-context'
 import {useMovies} from '../context/moviesContext'
 import MovieListItem from './MovieListItem'
+import {spacing} from '../styles'
+import {useTheme} from '../context/themeContext'
 
 function MovieListScreen({navigation}) {
   const [movies] = useMovies()
+  const {styles} = useTheme(styleSheet)
 
   return (
-    <SafeAreaView style={{flex: 1}} edges={['right', 'bottom', 'left']}>
+    <SafeAreaView style={styles.safeArea} edges={['right', 'bottom', 'left']}>
       <FlatList
-        style={{padding: 16}}
+        style={styles.container}
         data={movies}
         renderItem={({item}) => (
           <MovieListItem
@@ -25,5 +28,17 @@ function MovieListScreen({navigation}) {
     </SafeAreaView>
   )
 }
+
+const styleSheet = theme =>
+  StyleSheet.create({
+    safeArea: {
+      flex: 1,
+      backgroundColor: theme.bodyBackgroundColor
+    },
+    container: {
+      padding: spacing.base,
+      backgroundColor: theme.bodyBackgroundColor
+    }
+  })
 
 export default MovieListScreen

@@ -3,8 +3,10 @@ import {ScrollView, Text, View, StyleSheet} from 'react-native'
 import {SafeAreaView} from 'react-native-safe-area-context'
 import {useMovies} from '../context/moviesContext'
 import {colors, spacing, typography} from '../styles'
+import {useTheme} from '../context/themeContext'
 
 function MovieDetailScreen({navigation, route}) {
+  const {styles} = useTheme(styleSheet)
   const [movies] = useMovies()
   const movie = movies.find(m => m.episode_id === route.params.id)
 
@@ -14,8 +16,8 @@ function MovieDetailScreen({navigation, route}) {
   ])
 
   return (
-    <SafeAreaView style={{flex: 1}} edges={['right', 'bottom', 'left']}>
-      <ScrollView style={{padding: spacing.base}}>
+    <SafeAreaView style={styles.safeArea} edges={['right', 'bottom', 'left']}>
+      <ScrollView style={styles.container}>
         <Text style={styles.title}>Star Wars: {movie.title}</Text>
         <Text style={styles.byLine}>
           Originally released on {movie.release_date}
@@ -28,36 +30,44 @@ function MovieDetailScreen({navigation, route}) {
         </View>
 
         <View style={styles.rawResults}>
-          <Text style={typography.bodyText}>{JSON.stringify(movie)}</Text>
+          <Text style={styles.rawResultsText}>{JSON.stringify(movie)}</Text>
         </View>
       </ScrollView>
     </SafeAreaView>
   )
 }
 
-const styles = StyleSheet.create({
-  title: {
-    fontSize: typography.fs4,
-    fontWeight: typography.fwSemiBold,
-    marginBottom: spacing.smaller
-  },
-  byLine: {
-    color: colors.gray600,
-    fontSize: typography.fs2,
-    lineHeight: typography.lh2
-  },
-  crawl: {
-    color: colors.indigo900,
-    fontSize: typography.fs4,
-    fontStyle: 'italic',
-    lineHeight: typography.lh4
-  },
-  rawResults: {
-    borderTopColor: colors.indigo200,
-    borderTopWidth: spacing.hairline,
-    paddingTop: spacing.base,
-    marginTop: spacing.smaller
-  }
-})
+const styleSheet = theme =>
+  StyleSheet.create({
+    safeArea: {
+      flex: 1,
+      backgroundColor: theme.bodyBackgroundColor
+    },
+    container: {padding: spacing.base},
+    title: {
+      color: theme.strongTextColor,
+      fontSize: typography.fs4,
+      fontWeight: typography.fwSemiBold,
+      marginBottom: spacing.smaller
+    },
+    byLine: {
+      color: theme.subduedTextColor,
+      fontSize: typography.fs2,
+      lineHeight: typography.lh2
+    },
+    crawl: {
+      color: theme.highlightTextColor,
+      fontSize: typography.fs4,
+      fontStyle: 'italic',
+      lineHeight: typography.lh4
+    },
+    rawResults: {
+      borderTopColor: theme.listSeparatorColor,
+      borderTopWidth: spacing.hairline,
+      paddingTop: spacing.base,
+      marginTop: spacing.smaller
+    },
+    rawResultsText: theme.bodyText
+  })
 
 export default MovieDetailScreen
